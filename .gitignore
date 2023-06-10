@@ -389,3 +389,6 @@ FodyWeavers.xsd
 .DS_Store
 *.DotSettings
 MApp.Android/Resources/Resource.designer.cs
+
+# MarvelSearch
+MarvelAPIKeys.cs
