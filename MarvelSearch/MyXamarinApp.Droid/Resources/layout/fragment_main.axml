@@ -33,4 +33,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline" />
+
+     <Button
+        android:id="@+id/btn_search"
+        android:layout_width='fill_parent'
+        android:layout_height='wrap_content'
+        android:text='Search'
+        app:MvxBind='Click Search'
+        android:gravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_message"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

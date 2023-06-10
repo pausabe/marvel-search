@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using Android.OS;
 using Android.Views;
 using Android.Widget;
 using MarvelSearch.Core.ViewModels.Main;
@@ -19,5 +11,23 @@ namespace MarvelSearch.Droid.Views.Main
     public class MainFragment : BaseFragment<MainViewModel>
     {
         protected override int FragmentLayoutId => Resource.Layout.fragment_main;
+
+        private Button _btnSearch;
+        private TextView _btnTextView;
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
+
+            _btnSearch = view.FindViewById<Button>(Resource.Id.btn_search);
+            _btnTextView = view.FindViewById<TextView>(Resource.Id.txt_welcome);
+
+            var set = this.CreateBindingSet();
+            set.Bind(_btnTextView).To(vm => vm.Test);
+            set.Bind(_btnSearch).To(nameof(ViewModel.SearchCommand));
+            set.Apply();
+
+            return view;
+        }
     }
 }
