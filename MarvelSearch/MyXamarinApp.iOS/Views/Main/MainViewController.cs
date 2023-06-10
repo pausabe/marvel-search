@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Cirrious.FluentLayouts.Touch;
-using Foundation;
+﻿using Cirrious.FluentLayouts.Touch;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MarvelSearch.Core.ViewModels.Main;
 using UIKit;
+using CoreGraphics;
 
 namespace MarvelSearch.iOS.Views.Main
 {
@@ -15,6 +10,7 @@ namespace MarvelSearch.iOS.Views.Main
     public class MainViewController : BaseViewController<MainViewModel>
     {
         private UILabel _labelWelcome, _labelMessage;
+        private UIButton _buttonSearch;
 
         protected override void CreateView()
         {
@@ -31,6 +27,14 @@ namespace MarvelSearch.iOS.Views.Main
                 TextAlignment = UITextAlignment.Center
             };
             Add(_labelMessage);
+
+            _buttonSearch = new UIButton
+            {
+                Frame = new CGRect(25, 25, 300, 150),
+                BackgroundColor = UIColor.Red
+            };
+            _buttonSearch.SetTitle("Serach", UIControlState.Normal);
+            Add(_buttonSearch);
         }
 
         protected override void LayoutView()
@@ -41,8 +45,19 @@ namespace MarvelSearch.iOS.Views.Main
                 _labelWelcome.WithSameCenterY(View),
 
                 _labelMessage.Below(_labelWelcome, 10f),
-                _labelMessage.WithSameWidth(View)
+                _labelMessage.WithSameWidth(View),
+
+                _buttonSearch.Below(_labelMessage, 10f),
+                _buttonSearch.WithSameWidth(View)
            });
+        }
+
+        protected override void BindView()
+        {
+            var set = this.CreateBindingSet();
+            set.Bind(_labelWelcome).To(vm => vm.Test);
+            set.Bind(_buttonSearch).To(nameof(ViewModel.SearchCommand));
+            set.Apply();
         }
     }
 }
