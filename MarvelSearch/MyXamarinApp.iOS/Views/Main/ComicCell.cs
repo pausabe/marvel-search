@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Globalization;
 using Foundation;
 using MarvelSearch.Core.Models;
-using MvvmCross.Binding;
+using MarvelSearch.iOS;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Converters;
 using MvvmCross.Platforms.Ios.Binding.Views;
-using SDWebImage;
 using UIKit;
 
 namespace MyXamarinApp.iOS.Views.Main
@@ -16,72 +12,54 @@ namespace MyXamarinApp.iOS.Views.Main
     {
         public static readonly NSString Key = new NSString(nameof(ComicCell));
 
-        public UILabel Label { get; private set; }
-        public UIImageView ImageView { get; private set; }
+        public UILabel _label { get; private set; }
+        public UIImageView _imageView { get; private set; }
 
         public ComicCell(IntPtr handle) : base(handle)
         {
-            Initialize();
+            SetupViews();
+            SetupConstraints();
+            BindData();
         }
 
-        private void Initialize()
+        private void SetupViews()
         {
-            Label = new UILabel()
+            _label = new UILabel()
             {
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
-            ContentView.AddSubview(Label);
+            ContentView.AddSubview(_label);
 
-            var imageSize = 15;
-            ImageView = new UIImageView()
+            _imageView = new UIImageView()
             {
-                Frame = new CoreGraphics.CGRect(imageSize, imageSize, imageSize, imageSize),
-                BackgroundColor = UIColor.LightGray
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                ContentMode = UIViewContentMode.ScaleAspectFill
             };
-            ContentView.AddSubview(ImageView);
+            _imageView.Layer.MasksToBounds = true;
+            _imageView.Layer.CornerRadius = 20;
+            ContentView.AddSubview(_imageView);
+        }
 
-            NSLayoutConstraint.ActivateConstraints(new[]
-            {
-                Label.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, 8),
-                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LeadingAnchor, 16),
-                Label.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -16),
-                Label.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -8),
-                ImageView.TopAnchor.ConstraintEqualTo(Label.TopAnchor, 10)
-            });
+        private void SetupConstraints()
+        {
+            _imageView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).Active = true;
+            _imageView.TopAnchor.ConstraintEqualTo(TopAnchor).Active = true;
+            _imageView.BottomAnchor.ConstraintEqualTo(BottomAnchor).Active = true;
+            _imageView.WidthAnchor.ConstraintEqualTo(_imageView.HeightAnchor).Active = true;
+            _label.LeadingAnchor.ConstraintEqualTo(_imageView.TrailingAnchor, constant: 8).Active = true;
+            _label.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).Active = true;
+            _label.CenterYAnchor.ConstraintEqualTo(CenterYAnchor).Active = true;
+        }
 
+        private void BindData()
+        {
             this.DelayBind(() =>
             {
                 var set = this.CreateBindingSet<ComicCell, Comic>();
-                set.Bind(Label).To(vm => vm.Title);
-                set.Bind(ImageView).For("ImageUrl").To(vm => vm.Thumbnail.Url);
+                set.Bind(_label).To(vm => vm.Title);
+                set.Bind(_imageView).For(IOSKeys.SDWebImageTargetCustomBindingName).To(vm => vm.Thumbnail.Url);
                 set.Apply();
             });
-        }
-    }
-
-    // TODO: move to another file
-    public class SDWebImageTargetBinding : MvxTargetBinding
-    {
-        protected UIImageView ImageView => Target as UIImageView;
-
-        public override Type TargetType => typeof(string);
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-
-        public SDWebImageTargetBinding(object target)
-            : base(target)
-        {
-        }
-
-        public override void SetValue(object value)
-        {
-            if (ImageView == null) return;
-
-            if (value is string stringValue)
-            {
-                ImageView.SetImage(
-                    url: new NSUrl(stringValue));
-            }
         }
     }
 }

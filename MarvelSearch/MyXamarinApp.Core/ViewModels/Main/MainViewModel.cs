@@ -29,8 +29,9 @@ namespace MarvelSearch.Core.ViewModels.Main
             get => _searchText;
             set {
                 SetProperty(ref _searchText, value);
-                // TODO: search command by button
-                _ = SearchHandlerAsync();
+                if(value == "") {
+                    ComicsCollection.Clear();
+                }
             }
         }
 

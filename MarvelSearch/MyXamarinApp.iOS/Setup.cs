@@ -5,7 +5,7 @@ using Serilog;
 using Serilog.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using UIKit;
-using MyXamarinApp.iOS.Views.Main;
+using MyXamarinApp.iOS.TargetBindings;
 
 namespace MarvelSearch.iOS
 {
@@ -27,7 +27,7 @@ namespace MarvelSearch.iOS
         {
             base.FillTargetFactories(registry);
 
-            registry.RegisterCustomBindingFactory<UIImageView>("ImageUrl", view => new SDWebImageTargetBinding(view));
+            registry.RegisterCustomBindingFactory<UIImageView>(IOSKeys.SDWebImageTargetCustomBindingName, view => new SDWebImageTargetBinding(view));
         }
     }
 }

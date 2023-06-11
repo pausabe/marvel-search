@@ -140,7 +140,8 @@
     </ImageAsset>
     <Compile Include="Views\Main\ComicCell.cs" />
     <Compile Include="Views\Detail\DetailViewController.cs" />
-    <Compile Include="iOsKeys.cs" />
+    <Compile Include="IOsKeys.cs" />
+    <Compile Include="TargetBindings\SDWebImageTargetBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -223,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Detail\" />
+    <Folder Include="TargetBindings\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
