@@ -128,7 +128,6 @@
     <Content Include="Entitlements.plist" />
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
-    <Compile Include="Views\BaseViewController.cs" />
     <Compile Include="Views\Main\MainViewController.cs" />
     <InterfaceDefinition Include="LaunchScreen.storyboard">
       <SubType>Designer</SubType>
@@ -140,6 +139,7 @@
       <Visible>false</Visible>
     </ImageAsset>
     <Compile Include="Views\Main\ComicCell.cs" />
+    <Compile Include="Views\Detail\DetailViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -216,6 +216,9 @@
       <Project>{FC4DFCC7-820B-4CB5-B85E-23B712C256B5}</Project>
       <Name>MarvelSearch.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Detail\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

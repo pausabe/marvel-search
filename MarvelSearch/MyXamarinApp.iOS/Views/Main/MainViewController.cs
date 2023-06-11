@@ -7,7 +7,7 @@ using MvvmCross.Platforms.Ios.Views;
 
 namespace MarvelSearch.iOS.Views.Main
 {
-    public class MainViewController : MvxTableViewController<MainViewModel> //BaseViewController<MainViewModel>
+    public class MainViewController : MvxTableViewController<MainViewModel>
     {
         private UISearchBar _searchBar;
 

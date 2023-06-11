@@ -35,7 +35,7 @@ namespace MarvelSearch.Core.Services
             string baseUrl = "https://gateway.marvel.com/v1/public/comics";
             string timestamp = DateTime.Now.Ticks.ToString();
             string hash = CalculateHash(timestamp, MarvelAPIKeys.PrivateKey, MarvelAPIKeys.PublicKey);
-            int limit = 30;
+            int limit = 20;
             string url = $"{baseUrl}?titleStartsWith={marvelTitle}&apikey={MarvelAPIKeys.PublicKey}&ts={timestamp}&hash={hash}&limit={limit}&orderBy=title";
 
             try
