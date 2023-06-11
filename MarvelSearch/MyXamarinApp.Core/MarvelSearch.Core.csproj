@@ -16,11 +16,13 @@
     <None Remove="Services\MarvelAPI\" />
     <None Remove="Models\MarvelAPI\" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="ViewModels\DetailViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Models\" />
     <Folder Include="Services\MarvelAPI\" />
     <Folder Include="Models\MarvelAPI\" />
+    <Folder Include="ViewModels\Detail\" />
   </ItemGroup>
 </Project>

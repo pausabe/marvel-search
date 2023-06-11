@@ -17,5 +17,5 @@
         android:layout_height="fill_parent"
         android:textSize="40dp"
         local:MvxBind="ItemsSource ComicsCollection; ItemClick OpenDetailCommand"
-        local:MvxItemTemplate="@layout/item_test"/>
+        local:MvxItemTemplate="@layout/item_comic"/>
 </LinearLayout>

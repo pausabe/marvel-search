@@ -4,16 +4,22 @@ using MvvmCross.Commands;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using MarvelSearch.Core.Models;
+using MvvmCross.Navigation;
+using MarvelSearch.Core.ViewModels.Detail;
 
 namespace MarvelSearch.Core.ViewModels.Main
 {
     public class MainViewModel : BaseViewModel
     {
 
-        IMarvelAPIService _marvelAPIService;
+        private readonly IMvxNavigationService _navigationService;
+        private readonly IMarvelAPIService _marvelAPIService;
 
-        public MainViewModel(IMarvelAPIService marvelAPIService)
+        public MainViewModel(
+            IMvxNavigationService navigationService,
+            IMarvelAPIService marvelAPIService)
         {
+            _navigationService = navigationService;
             _marvelAPIService = marvelAPIService;
         }
 
@@ -59,9 +65,14 @@ namespace MarvelSearch.Core.ViewModels.Main
 
         public IMvxCommand OpenDetailCommand => new MvxAsyncCommand(OpenDetailHandlerAsync);
 
-        private Task OpenDetailHandlerAsync()
+        private async Task OpenDetailHandlerAsync()
         {
-            throw new NotImplementedException();
+            // TODO: real selected
+            var selectedComic = new Comic
+            {
+                Title = "testing navigation"
+            };
+            await _navigationService.Navigate<DetailViewModel, Comic>(selectedComic);
         }
 
         private async Task SearchHandlerAsync()
