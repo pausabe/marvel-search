@@ -4,7 +4,6 @@ using MvvmCross.Commands;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using MarvelSearch.Core.Models;
-using System.Collections.Generic;
 
 namespace MarvelSearch.Core.ViewModels.Main
 {
@@ -47,14 +46,6 @@ namespace MarvelSearch.Core.ViewModels.Main
                 });*/
                 _ = SearchHandlerAsync();
             }
-        }
-
-        private List<string> _items;
-
-        public List<string> Items
-        {
-            get => _items;
-            set => SetProperty(ref _items, value);
         }
 
         private ObservableCollection<Comic> _comicsCollection = new ObservableCollection<Comic>();

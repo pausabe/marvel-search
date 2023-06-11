@@ -1,5 +1,6 @@
 ﻿using System;
 using Foundation;
+using MarvelSearch.Core.Models;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Binding.Views;
 using UIKit;
@@ -12,14 +13,9 @@ namespace MyXamarinApp.iOS.Views.Main
 
         public UILabel Label { get; private set; }
 
-        public ComicCell()
-        {
-            Initialize();
-        }
-
         protected ComicCell(IntPtr handle) : base(handle)
         {
-            Console.WriteLine($"Easdf");
+            Initialize();
         }
 
         private void Initialize()
@@ -40,8 +36,8 @@ namespace MyXamarinApp.iOS.Views.Main
 
             this.DelayBind(() =>
             {
-                var set = this.CreateBindingSet<ComicCell, string>();
-                set.Bind(Label).To(vm => vm);
+                var set = this.CreateBindingSet<ComicCell, Comic>();
+                set.Bind(Label).To(vm => vm.Title);
                 set.Apply();
             });
         }

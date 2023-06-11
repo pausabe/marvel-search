@@ -139,8 +139,6 @@
     <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <Compile Include="Views\Main\ComicCellViewController.cs" />
-    <Compile Include="Views\Main\MvxImageViewLoader.cs" />
     <Compile Include="Views\Main\ComicCell.cs" />
   </ItemGroup>
   <ItemGroup>
