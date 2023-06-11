@@ -122,6 +122,10 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\activity_detail_container.axml" />
+    <AndroidResource Include="Resources\drawable\round_shape.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />

@@ -9,13 +9,24 @@
         android:contentDescription=""
         android:id="@+id/image_view"
         android:layout_width="match_parent"
+        android:background="@android:color/black"
         android:layout_height="200dp"
         local:MvxBind="Bitmap StringToImage(SelectedComic.Thumbnail.Url)" />
 
     <TextView
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         local:MvxBind="Text SelectedComic.Title"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        local:MvxBind="Text SelectedComic.Description"/>
 
 </LinearLayout>

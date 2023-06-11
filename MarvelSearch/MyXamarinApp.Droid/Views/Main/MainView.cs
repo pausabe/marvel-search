@@ -17,6 +17,7 @@ namespace MarvelSearch.Droid.Views.Main
             var view = base.OnCreateView(inflater, container, savedInstanceState);
 
             var searchView = view.FindViewById<SearchView>(Resource.Id.search_view);
+            var btnSearch = view.FindViewById<Button>(Resource.Id.btn_search);
 
             var set = this.CreateBindingSet();
             set.Bind(searchView).For(v => v.Query).To(vm => vm.SearchText);

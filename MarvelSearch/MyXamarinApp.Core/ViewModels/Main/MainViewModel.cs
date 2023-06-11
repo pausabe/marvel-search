@@ -14,7 +14,6 @@ namespace MarvelSearch.Core.ViewModels.Main
 
         private readonly IMvxNavigationService _navigationService;
         private readonly IMarvelAPIService _marvelAPIService;
-
         public MainViewModel(
             IMvxNavigationService navigationService,
             IMarvelAPIService marvelAPIService)

@@ -4,7 +4,7 @@
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimary">#ffff</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/accentColor</item>
         <item name="colorControlNormal">@color/primaryColor</item>
@@ -24,5 +24,9 @@
 
     <!-- Default Splash Screen theme applied if no resource style overrides for specific API level -->
     <style name="AppTheme.Splash" parent="AppTheme.Splash.Base">
+    </style>
+
+   <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+      <item name="cornerSize">50%</item>
     </style>
 </resources>

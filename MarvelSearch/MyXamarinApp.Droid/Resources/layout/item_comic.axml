@@ -5,11 +5,13 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:contentDescription=""
         android:id="@+id/image_view"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="center"
+        local:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
         local:MvxBind="Bitmap StringToImage(Thumbnail.Url)" />
 
     <TextView

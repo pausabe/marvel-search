@@ -4,12 +4,26 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <SearchView
-        android:id="@+id/search_view"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:iconifiedByDefault="false"
-        android:queryHint="@string/abc_search_hint"/>
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/abc_search_hint"/>
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width='wrap_content'
+            android:layout_height='match_parent'
+            android:text='Search'
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            local:MvxBind='Click SearchCommand'/>
+    </LinearLayout>
 
     <mvvmcross.droidx.recyclerview.MvxRecyclerView
         android:id="@+id/list_view"
