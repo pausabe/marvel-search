@@ -5,6 +5,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
+    <ImageView
+        android:contentDescription=""
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        local:MvxBind="Bitmap StringToImage(SelectedComic.Thumbnail.Url)" />
+
     <TextView
         android:layout_marginTop="100dp"
         android:layout_width="match_parent"

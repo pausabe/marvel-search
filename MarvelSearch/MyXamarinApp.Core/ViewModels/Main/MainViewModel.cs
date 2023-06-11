@@ -29,27 +29,7 @@ namespace MarvelSearch.Core.ViewModels.Main
             get => _searchText;
             set {
                 SetProperty(ref _searchText, value);
-
-                // TODO:Throttle
-
-                /* Observable.FromEventPattern<PropertyChangedEventHandler, PropertyChangedEventArgs>(
-                s => PropertyChanged += s,
-                    s => PropertyChanged -= s)
-                .Select(evnt => evnt.EventArgs.PropertyName)
-                .Where(evnt => evnt == nameof(SearchTerm) && AdvancedSearch)
-                .Throttle(TimeSpan.FromMilliseconds(ThrottleMilliseconds))
-                .ObserveOn(await MainThread.UISyncContext())
-                .Do(_ =>
-                {
-                    RunningAdvancedSearch = true;
-                    Collection.Clear();
-                })
-                .Select(_ => Items.Where(Filter))
-                .Subscribe(items =>
-                {
-                    Collection.AddRange(items);
-                    RunningAdvancedSearch = false;
-                });*/
+                // TODO: search command by button
                 _ = SearchHandlerAsync();
             }
         }

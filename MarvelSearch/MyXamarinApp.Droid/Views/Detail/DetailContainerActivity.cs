@@ -10,6 +10,6 @@ namespace MarvelSearch.Droid.Views.Main
         WindowSoftInputMode = SoftInput.AdjustResize | SoftInput.StateHidden)]
     public class DetailContainerActivity : BaseActivity<DetailContainerViewModel>
     {
-        protected override int ActivityLayoutId => Resource.Layout.activity_main_container;
+        protected override int ActivityLayoutId => Resource.Layout.activity_detail_container;
     }
 }

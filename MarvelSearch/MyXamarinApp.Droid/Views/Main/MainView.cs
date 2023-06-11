@@ -7,7 +7,7 @@ using MyXamarinApp.Droid;
 
 namespace MarvelSearch.Droid.Views.Main
 {
-    [MvxFragmentPresentation(typeof(MainContainerViewModel), Resource.Id.content_frame)]
+    [MvxFragmentPresentation(typeof(MainContainerViewModel), Resource.Id.content_main_frame)]
     public class MainView : BaseFragment<MainViewModel>
     {
         protected override int FragmentLayoutId => Resource.Layout.fragment_main;
