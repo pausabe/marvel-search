@@ -24,6 +24,9 @@ namespace MyXamarinApp.iOS.Views.Detail
 
             View.BackgroundColor = UIColor.White;
 
+            NavigationController.NavigationBar.Translucent = false;
+            NavigationController.NavigationBar.Hidden = false;
+
             _title = new UILabel()
             {
                 TextAlignment = UITextAlignment.Center

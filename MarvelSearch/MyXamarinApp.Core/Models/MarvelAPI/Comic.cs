@@ -16,5 +16,6 @@ namespace MarvelSearch.Core.Models
     {
         public string Path { get; set; }
         public string Extension { get; set; }
+        public string Url => $"{Path.Replace("http", "https")}.{Extension}";
     }
 }

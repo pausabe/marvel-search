@@ -140,6 +140,7 @@
     </ImageAsset>
     <Compile Include="Views\Main\ComicCell.cs" />
     <Compile Include="Views\Detail\DetailViewController.cs" />
+    <Compile Include="iOsKeys.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -162,6 +163,9 @@
     </PackageReference>
     <PackageReference Include="Serilog.Sinks.Xamarin">
       <Version>0.2.0.64</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.SDWebImage">
+      <Version>4.4.7</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

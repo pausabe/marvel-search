@@ -3,6 +3,9 @@ using MvvmCross.Platforms.Ios.Core;
 using MarvelSearch.Core;
 using Serilog;
 using Serilog.Extensions.Logging;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using UIKit;
+using MyXamarinApp.iOS.Views.Main;
 
 namespace MarvelSearch.iOS
 {
@@ -18,6 +21,13 @@ namespace MarvelSearch.iOS
                 .CreateLogger();
 
             return new SerilogLoggerFactory();
+        }
+
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            base.FillTargetFactories(registry);
+
+            registry.RegisterCustomBindingFactory<UIImageView>("ImageUrl", view => new SDWebImageTargetBinding(view));
         }
     }
 }

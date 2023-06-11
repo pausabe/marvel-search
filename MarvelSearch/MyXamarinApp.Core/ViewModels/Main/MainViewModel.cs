@@ -62,16 +62,10 @@ namespace MarvelSearch.Core.ViewModels.Main
         }
 
         public IMvxCommand SearchCommand => new MvxAsyncCommand(SearchHandlerAsync);
+        public IMvxCommand OpenDetailCommand => new MvxAsyncCommand<Comic>(OpenDetailHandlerAsync);
 
-        public IMvxCommand OpenDetailCommand => new MvxAsyncCommand(OpenDetailHandlerAsync);
-
-        private async Task OpenDetailHandlerAsync()
+        private async Task OpenDetailHandlerAsync(Comic selectedComic)
         {
-            // TODO: real selected
-            var selectedComic = new Comic
-            {
-                Title = "testing navigation"
-            };
             await _navigationService.Navigate<DetailViewModel, Comic>(selectedComic);
         }
 
