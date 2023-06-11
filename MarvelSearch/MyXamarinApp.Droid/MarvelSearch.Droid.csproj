@@ -77,7 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Detail\DetailView.cs" />
     <Compile Include="Views\Detail\DetailContainerActivity.cs" />
-    <Compile Include="Views\CustomImageView.cs" />
+    <Compile Include="Converters\StringToImageConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions">
@@ -97,6 +97,12 @@
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.ConstraintLayout">
       <Version>2.1.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Glide">
+      <Version>4.11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmCross.DroidX.RecyclerView">
+      <Version>8.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Detail\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

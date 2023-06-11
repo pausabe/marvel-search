@@ -6,9 +6,11 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:contentDescription=""
         android:id="@+id/image_view"
         android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        local:MvxBind="Bitmap StringToImage(Thumbnail.Url)" />
 
     <TextView
         android:layout_width="match_parent"

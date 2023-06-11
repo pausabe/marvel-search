@@ -4,9 +4,11 @@ using MvvmCross.Platforms.Ios.Binding.Views;
 using MvvmCross.Binding.BindingContext;
 using MyXamarinApp.iOS.Views.Main;
 using MvvmCross.Platforms.Ios.Views;
+using MvvmCross.Platforms.Ios.Presenters.Attributes;
 
 namespace MarvelSearch.iOS.Views.Main
 {
+    [MvxRootPresentation(WrapInNavigationController = true)]
     public class MainViewController : MvxTableViewController<MainViewModel>
     {
         private UISearchBar _searchBar;
