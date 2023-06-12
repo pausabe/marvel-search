@@ -1,17 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
-using MarvelSearch.Core.Models;
 using MarvelSearch.Core.Services;
 using NUnit.Framework;
 using Moq;
 using Moq.Protected;
 using System.Threading;
-using System;
 
-namespace MarvelSearch.Tests
+namespace MarvelSearch.Tests.Services.MarvelAPI
 {
     public class MarvelAPIServiceTests
     {

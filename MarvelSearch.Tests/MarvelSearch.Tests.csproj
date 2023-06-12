@@ -17,10 +17,12 @@
     <None Remove="Services\" />
     <None Remove="Services\MarvelAPI\" />
     <None Remove="Moq" />
+    <None Remove="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Services\MarvelAPI\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MarvelSearch\MyXamarinApp.Core\MarvelSearch.Core.csproj" />
