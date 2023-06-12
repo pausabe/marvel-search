@@ -1,4 +1,5 @@
 ﻿using System;
+using Cirrious.FluentLayouts.Touch;
 using Foundation;
 using MarvelSearch.Core.Models;
 using MarvelSearch.iOS;
@@ -12,7 +13,8 @@ namespace MyXamarinApp.iOS.Views.Main
     {
         public static readonly NSString Key = new NSString(nameof(ComicCell));
 
-        public UILabel _label { get; private set; }
+        public UILabel _title { get; private set; }
+        public UILabel _subtitle { get; private set; }
         public UIImageView _imageView { get; private set; }
 
         public ComicCell(IntPtr handle) : base(handle)
@@ -24,11 +26,19 @@ namespace MyXamarinApp.iOS.Views.Main
 
         private void SetupViews()
         {
-            _label = new UILabel()
+            _title = new UILabel()
             {
-                TranslatesAutoresizingMaskIntoConstraints = false
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(16)
             };
-            ContentView.AddSubview(_label);
+            ContentView.AddSubview(_title);
+
+            _subtitle = new UILabel()
+            {
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                Font = UIFont.SystemFontOfSize(12)
+            };
+            ContentView.AddSubview(_subtitle);
 
             _imageView = new UIImageView()
             {
@@ -42,13 +52,31 @@ namespace MyXamarinApp.iOS.Views.Main
 
         private void SetupConstraints()
         {
-            _imageView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).Active = true;
+            /*_imageView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).Active = true;
             _imageView.TopAnchor.ConstraintEqualTo(TopAnchor).Active = true;
             _imageView.BottomAnchor.ConstraintEqualTo(BottomAnchor).Active = true;
             _imageView.WidthAnchor.ConstraintEqualTo(_imageView.HeightAnchor).Active = true;
-            _label.LeadingAnchor.ConstraintEqualTo(_imageView.TrailingAnchor, constant: 8).Active = true;
-            _label.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).Active = true;
-            _label.CenterYAnchor.ConstraintEqualTo(CenterYAnchor).Active = true;
+
+            _title.LeadingAnchor.ConstraintEqualTo(_imageView.TrailingAnchor, constant: 8).Active = true;
+            _title.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).Active = true;
+            _title.CenterYAnchor.ConstraintEqualTo(CenterYAnchor).Active = true;
+
+            _subtitle.LeadingAnchor.ConstraintEqualTo(_title.TrailingAnchor, constant: 8).Active = true;
+            _subtitle.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).Active = true;
+            _subtitle.CenterYAnchor.ConstraintEqualTo(CenterYAnchor).Active = true;*/
+
+            var imageSize = 40;
+            var leftPadding = 5;
+            ContentView.AddConstraints(
+                _imageView.AtLeadingOf(ContentView, leftPadding),
+                _imageView.Width().EqualTo(imageSize),
+                _imageView.Height().EqualTo(imageSize),
+
+                _title.AtLeadingOf(ContentView, imageSize + leftPadding + leftPadding),
+
+                _subtitle.AtLeadingOf(ContentView, imageSize + leftPadding + leftPadding),
+                _subtitle.Below(_title)
+            );
         }
 
         private void BindData()
@@ -56,7 +84,8 @@ namespace MyXamarinApp.iOS.Views.Main
             this.DelayBind(() =>
             {
                 var set = this.CreateBindingSet<ComicCell, Comic>();
-                set.Bind(_label).To(vm => vm.Title);
+                set.Bind(_title).To(vm => vm.Title);
+                set.Bind(_subtitle).To(vm => vm.Modified);
                 set.Bind(_imageView).For(IOSKeys.SDWebImageTargetCustomBindingName).To(vm => vm.Thumbnail.Url);
                 set.Apply();
             });

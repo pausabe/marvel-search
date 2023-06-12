@@ -78,6 +78,7 @@
     <Compile Include="Views\Detail\DetailView.cs" />
     <Compile Include="Views\Detail\DetailContainerActivity.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
+    <Compile Include="AndroidKeys.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions">

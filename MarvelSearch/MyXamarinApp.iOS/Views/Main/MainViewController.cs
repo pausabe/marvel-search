@@ -5,8 +5,6 @@ using MvvmCross.Binding.BindingContext;
 using MyXamarinApp.iOS.Views.Main;
 using MvvmCross.Platforms.Ios.Views;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
-using Cirrious.FluentLayouts.Touch;
-using System;
 
 namespace MarvelSearch.iOS.Views.Main
 {
@@ -21,10 +19,10 @@ namespace MarvelSearch.iOS.Views.Main
 
             _searchBar = new UISearchBar()
             {
-                Placeholder = "Search..." // TODO: literals
+                Placeholder = IOSKeys.SearchBarPlaceholderText
             };
             NavigationItem.TitleView = _searchBar;
-            NavigationItem.RightBarButtonItem = new UIBarButtonItem("Search", UIBarButtonItemStyle.Plain, null);
+            NavigationItem.RightBarButtonItem = new UIBarButtonItem(IOSKeys.SearchButtonText, UIBarButtonItemStyle.Plain, null);
 
             var source = new MvxSimpleTableViewSource(TableView, typeof(ComicCell), ComicCell.Key);
             TableView.Source = source;
