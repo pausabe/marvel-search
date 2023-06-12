@@ -1,11 +1,7 @@
 # Marvel Search
 
 <p align="center">
-  <img src="./demo_ios.gif" alt="" width="200" />
-</p>
-
-<p align="center">
-  <img src="./demo_android.gif" alt="" width="200" />
+  <img src="./demo.gif" alt="" width="200" />
 </p>
 
 Marvel Search is a cross-platform app that implements MVVM with MvvmCross using Xamarin.Native.
