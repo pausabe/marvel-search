@@ -5,6 +5,7 @@ using Serilog;
 using Serilog.Extensions.Logging;
 using MvvmCross.Converters;
 using MyXamarinApp.Droid;
+using MyXamarinApp.Droid.Converters;
 
 namespace MarvelSearch.Droid
 {
@@ -26,6 +27,7 @@ namespace MarvelSearch.Droid
         {
             base.FillValueConverters(registry);
             registry.AddOrOverwrite(AndroidKeys.StringToImageConverterName, new StringToImageConverter());
+            registry.AddOrOverwrite(AndroidKeys.TextToVisibilityConverterName, new TextToVisibilityConverter());
         }
     }
 }

@@ -20,17 +20,24 @@ namespace MarvelSearch.Core.Services
 
         public async Task<List<Comic>> GetComics(string marvelTitle)
         {
-            var rawResponse = await GetMarvelElementsByTitle(marvelTitle);
-            return MapResponse(rawResponse);
+            try
+            {
+                var rawResponse = await GetMarvelComicsByTitle(marvelTitle);
+                return MapResponse(rawResponse);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
         }
 
-        private async Task<string> GetMarvelElementsByTitle(string marvelTitle)
+        private async Task<string> GetMarvelComicsByTitle(string marvelTitle)
         {
             if (_client == null)
             {
                 _client = new HttpClient();
             }
-            string responseBody = "";
 
             string baseUrl = "https://gateway.marvel.com/v1/public/comics";
             string timestamp = DateTime.Now.Ticks.ToString();
@@ -38,19 +45,12 @@ namespace MarvelSearch.Core.Services
             int limit = 20;
             string url = $"{baseUrl}?titleStartsWith={marvelTitle}&apikey={MarvelAPIKeys.PublicKey}&ts={timestamp}&hash={hash}&limit={limit}&orderBy=title";
 
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                responseBody = await response.Content.ReadAsStringAsync();
-                return responseBody;
-            }
-            catch (HttpRequestException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+            HttpResponseMessage response = await _client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
 
             _client.Dispose();
+            _client = null;
             return responseBody;
         }
 
@@ -72,30 +72,7 @@ namespace MarvelSearch.Core.Services
 
         private List<Comic> MapResponse(string rawResponse)
         {
-            if (string.IsNullOrEmpty(rawResponse))
-            {
-                return new List<Comic>();
-            }
-
-            ComicsResponse comicsResponse;
-            try
-            {
-                comicsResponse = JsonConvert.DeserializeObject<ComicsResponse>(rawResponse);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                return new List<Comic>();
-            }
-
-            if(comicsResponse == null ||
-                comicsResponse.Code != 200 ||
-                comicsResponse.Data == null ||
-                comicsResponse.Data.Results == null)
-            {
-                return new List<Comic>();
-            }
-
+            ComicsResponse comicsResponse = JsonConvert.DeserializeObject<ComicsResponse>(rawResponse);
             return comicsResponse.Data.Results;
         }
     }

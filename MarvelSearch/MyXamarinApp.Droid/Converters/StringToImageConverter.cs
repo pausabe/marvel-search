@@ -1,40 +1,41 @@
 ﻿using System;
 using System.Globalization;
-using Android.App;
 using Android.Graphics;
-using Android.Graphics.Drawables;
 using Bumptech.Glide;
 using MvvmCross;
 using MvvmCross.Converters;
 using MvvmCross.Platforms.Android;
 
-public class StringToImageConverter : IMvxValueConverter
+namespace MyXamarinApp.Droid.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public class StringToImageConverter : IMvxValueConverter
     {
-        if (value is string imageUrl)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Bitmap bitmap = LoadImageFromUrl(imageUrl);
-            return bitmap;
+            if (value is string imageUrl)
+            {
+                Bitmap bitmap = LoadImageFromUrl(imageUrl);
+                return bitmap;
+            }
+
+            return null;
         }
 
-        return null;
-    }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
+        private Bitmap LoadImageFromUrl(string url)
+        {
+            var context = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+            var bitmap = Glide.With(context)
+                .AsBitmap()
+                .Load(url)
+                .Submit()
+                .Get();
 
-    private Bitmap LoadImageFromUrl(string url)
-    {
-        var context = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
-        var bitmap = Glide.With(context)
-            .AsBitmap()
-            .Load(url)
-            .Submit()
-            .Get();
-
-        return (Bitmap)bitmap;
+            return (Bitmap)bitmap;
+        }
     }
 }

@@ -47,6 +47,47 @@ namespace MarvelSearch.Tests
         }
 
         [Test]
+        public async Task GetComics_WhenIncorrectDeserializationWeGetNullList()
+        {
+            string incorrectJson = "{ incorrect JSON }";
+            string correctJsonWithIncorrectCode = "{\"code\": 500, \"status\": \"Ok\", \"data\": {\"offset\": 0, \"limit\": 20, \"total\": 100, \"count\": 2, \"results\": [{\"id\": 1, \"title\": \"Comic 1\", \"description\": \"Description 1\"}, {\"id\": 2, \"title\": \"Comic 2\", \"description\": \"Description 2\"}]}}";
+
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(incorrectJson)
+            };
+
+            _httpMessageHandlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>(
+                  "SendAsync",
+                  ItExpr.IsAny<HttpRequestMessage>(),
+                  ItExpr.IsAny<CancellationToken>())
+                .ReturnsAsync(response);
+
+            var comics = await _marvelAPIService.GetComics("");
+
+            Assert.IsNull(comics);
+
+            response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(correctJsonWithIncorrectCode)
+            };
+
+            _httpMessageHandlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>(
+                  "SendAsync",
+                  ItExpr.IsAny<HttpRequestMessage>(),
+                  ItExpr.IsAny<CancellationToken>())
+                .ReturnsAsync(response);
+
+            comics = await _marvelAPIService.GetComics("");
+
+            Assert.IsNull(comics);
+        }
+
+        [Test]
         public async Task GetComics_ShouldHandleHttpRequestException()
         {
              _httpMessageHandlerMock
@@ -56,9 +97,10 @@ namespace MarvelSearch.Tests
 
             var comics = await _marvelAPIService.GetComics("");
 
-            Assert.AreEqual(comics.Count, 0);
+            Assert.IsNull(comics);
         }
 
+        // Private methods tested using reflection
         [Test]
         public void CalculateHash_ShouldReturnCorrectHash()
         {
@@ -73,43 +115,6 @@ namespace MarvelSearch.Tests
             object hash = methodInfo.Invoke(_marvelAPIService, parameters);
 
             Assert.AreEqual(expectedHash, hash);
-        }
-
-        [Test]
-        public void MapResponse_ShouldDeserializeCorrectly()
-        {
-            string json = "{\"code\": 200, \"status\": \"Ok\", \"data\": {\"offset\": 0, \"limit\": 20, \"total\": 100, \"count\": 2, \"results\": [{\"id\": 1, \"title\": \"Comic 1\", \"description\": \"Description 1\"}, {\"id\": 2, \"title\": \"Comic 2\", \"description\": \"Description 2\"}]}}";
-
-            MethodInfo methodInfo = typeof(MarvelAPIService)
-                .GetMethod("MapResponse", BindingFlags.NonPublic | BindingFlags.Instance);
-            object[] parameters = { json };
-            List<Comic> comics = (List<Comic>)methodInfo.Invoke(_marvelAPIService, parameters);
-
-            Assert.AreEqual(2, comics.Count);
-            Assert.AreEqual("Comic 1", comics[0].Title);
-            Assert.AreEqual("Description 1", comics[0].Description);
-            Assert.AreEqual("Comic 2", comics[1].Title);
-            Assert.AreEqual("Description 2", comics[1].Description);
-        }
-
-        [Test]
-        public void MapResponse_WhenIncorrectDeserializationWeGetEmptyList()
-        {
-            string incorrectJson = "{ incorrect JSON }";
-            string correctJsonWithIncorrectCode = "{\"code\": 500, \"status\": \"Ok\", \"data\": {\"offset\": 0, \"limit\": 20, \"total\": 100, \"count\": 2, \"results\": [{\"id\": 1, \"title\": \"Comic 1\", \"description\": \"Description 1\"}, {\"id\": 2, \"title\": \"Comic 2\", \"description\": \"Description 2\"}]}}";
-            
-            MethodInfo methodInfo = typeof(MarvelAPIService)
-                .GetMethod("MapResponse", BindingFlags.NonPublic | BindingFlags.Instance);
-
-            object[] parameters = { incorrectJson };
-            List<Comic> comics = (List<Comic>)methodInfo.Invoke(_marvelAPIService, parameters);
-
-            Assert.AreEqual(0, comics.Count);
-
-            parameters = new object[]{ correctJsonWithIncorrectCode };
-            comics = (List<Comic>)methodInfo.Invoke(_marvelAPIService, parameters);
-
-            Assert.AreEqual(0, comics.Count);
         }
     }
 }

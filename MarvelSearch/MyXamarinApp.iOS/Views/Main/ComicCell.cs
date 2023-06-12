@@ -52,19 +52,6 @@ namespace MyXamarinApp.iOS.Views.Main
 
         private void SetupConstraints()
         {
-            /*_imageView.LeadingAnchor.ConstraintEqualTo(LeadingAnchor).Active = true;
-            _imageView.TopAnchor.ConstraintEqualTo(TopAnchor).Active = true;
-            _imageView.BottomAnchor.ConstraintEqualTo(BottomAnchor).Active = true;
-            _imageView.WidthAnchor.ConstraintEqualTo(_imageView.HeightAnchor).Active = true;
-
-            _title.LeadingAnchor.ConstraintEqualTo(_imageView.TrailingAnchor, constant: 8).Active = true;
-            _title.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).Active = true;
-            _title.CenterYAnchor.ConstraintEqualTo(CenterYAnchor).Active = true;
-
-            _subtitle.LeadingAnchor.ConstraintEqualTo(_title.TrailingAnchor, constant: 8).Active = true;
-            _subtitle.TrailingAnchor.ConstraintEqualTo(TrailingAnchor).Active = true;
-            _subtitle.CenterYAnchor.ConstraintEqualTo(CenterYAnchor).Active = true;*/
-
             var imageSize = 40;
             var leftPadding = 5;
             ContentView.AddConstraints(

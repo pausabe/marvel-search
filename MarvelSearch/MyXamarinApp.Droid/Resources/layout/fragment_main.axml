@@ -25,6 +25,15 @@
             local:MvxBind='Click SearchCommand'/>
     </LinearLayout>
 
+     <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            local:MvxBind="Text EmptyListText; Visibility TextToVisibility(EmptyListText)"/>
+
     <mvvmcross.droidx.recyclerview.MvxRecyclerView
         android:id="@+id/list_view"
         android:layout_width="fill_parent"

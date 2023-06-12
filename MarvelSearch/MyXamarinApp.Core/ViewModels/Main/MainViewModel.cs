@@ -28,9 +28,20 @@ namespace MarvelSearch.Core.ViewModels.Main
             get => _searchText;
             set {
                 SetProperty(ref _searchText, value);
-                if(value == "") {
+                if(value == string.Empty) {
                     ComicsCollection.Clear();
+                    EmptyListText = string.Empty;
                 }
+            }
+        }
+
+        private string _emptyListText;
+        public string EmptyListText
+        {
+            get => _emptyListText;
+            set
+            {
+                SetProperty(ref _emptyListText, value);
             }
         }
 
@@ -51,21 +62,23 @@ namespace MarvelSearch.Core.ViewModels.Main
 
         private async Task SearchHandlerAsync()
         {
-            try
+            ComicsCollection.Clear();
+            if (SearchText != "")
             {
-                ComicsCollection.Clear();
-                if (SearchText != "")
+                var comics = await _marvelAPIService.GetComics(SearchText);
+                if (comics == null)
                 {
-                    var comics = await _marvelAPIService.GetComics(SearchText);
-                    if (comics != null && comics.Count > 0)
-                    {
-                        comics.ForEach(comic => ComicsCollection.Add(comic));
-                    }
+                    EmptyListText = LanguageKeys.ErrorGettingComics;
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
+                else if (comics.Count == 0)
+                {
+                    EmptyListText = LanguageKeys.EmptyComics;
+                }
+                else
+                {
+                    EmptyListText = string.Empty;
+                    comics.ForEach(comic => ComicsCollection.Add(comic));
+                }
             }
         }
     }
