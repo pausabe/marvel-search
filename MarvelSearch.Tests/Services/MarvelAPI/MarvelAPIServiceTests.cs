@@ -97,7 +97,10 @@ namespace MarvelSearch.Tests.Services.MarvelAPI
             Assert.IsNull(comics);
         }
 
-        // Private methods tested using reflection
+        /// <summary>
+        /// CalucaleHash is private and we don't want to expose it for now.
+        /// Therefore, we need reflection to test it.
+        /// </summary>
         [Test]
         public void CalculateHash_ShouldReturnCorrectHash()
         {
